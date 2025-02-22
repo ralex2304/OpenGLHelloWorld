@@ -3,22 +3,9 @@ from conan.tools.cmake import CMake, cmake_layout
 
 def detect_display_server():
     import os
-    import subprocess
 
-    if "WAYLAND_DISPLAY" in os.environ:
+    if "CONAN_WAYLAND" in os.environ:
         return "wayland"
-
-    if "DISPLAY" in os.environ:
-        return "x11"
-
-    try:
-        output = subprocess.check_output(["loginctl", "show-session", os.environ.get("XDG_SESSION_ID"), "-p", "Type"], text=True)
-        if "wayland" in output.lower():
-            return "wayland"
-        elif "x11" in output.lower():
-            return "x11"
-    except Exception:
-        pass
 
     return "x11"
 

@@ -15,6 +15,8 @@
 
 ## Preparation
 
+Specify env var `CONAN_WAYLAND=1` for GLFW Wayland build (GLFW works fine with XWayland too).
+
 ```
 conan install . --build=missing
 cmake --preset conan-release
